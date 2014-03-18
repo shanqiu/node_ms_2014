@@ -1,0 +1,117 @@
+<html>
+	<head>
+		<title>button and pot</title>
+		<style type="text/css">
+			button { font-size: 1.2em; 
+					
+					 width: 100px; 
+					 height: 100px; 
+					 border-radius: 50%; 
+					 background: white;
+					;
+					}
+			body{
+				 font-family:helvetica;
+		
+			}		
+
+		</style>
+	</head>
+	<body>
+		<h1>Father's Panel</h1>
+		<h4>Water Son's Plant</h4>
+		<div id="ardButton01" style="font-size: 1.2em; width: 100px; height: 100px; border-radius: 50%; background-color: #eeeeee"> </div>
+		<h4>Light up Son's Plant</h4>
+
+		
+
+		<h4>Receiving Son's Plant's Light Value</h4>
+		<div id="lightPot02" style="display:block; height: 25px; background: red"></div>
+
+		<h4>Receiving Son's Plant's Humid Value</h4>
+		<div  style="display:block; height: 25px; width:200px;background: black"></div>
+		<h4>Receiving Son's Plant's Temperature Value</h4>
+		<div  style="display:block; height: 25px; width:200px;background: black" ></div>
+		<br></br>
+		<a href="http://www.wentong.info/message/comment.php">Talk to Son</a>
+
+		<h1>Son's Panel</h1>
+		<h4>Water Father's plant</h4>
+		<div id="ardButton02" style="font-size: 1.2em; width: 100px; height: 100px; border-radius: 50%; background-color: #eeeeee"> </div>
+		<h4>Light up Father's plant</h4>
+
+		<h4>Receiving Father's Plant's Light Value</h4>
+		<div id="lightPot01" style="display:block; height: 25px; background: red"></div>
+
+
+		<h4>Receiving Father's Plant's Humid Value</h4>
+		<div  style="display:block; height: 25px; width: 200px;background: black" ></div>
+		<h4>Receiving Father's Plant's Temperature Value</h4>
+		<div  style="display:block; height: 25px; width:200px;background: black" ></div>
+		<br></br>
+		<a href="http://www.wentong.info/message/comment.php">Talk to Father</a>
+		<script src="http://localhost:9001/socket.io/socket.io.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>		
+		<script>
+			var socket = io.connect('http://localhost:9001');
+
+
+
+
+			socket.on('lightPot01', function(data){
+				console.log('light value01'+ data);
+				$('#lightPot01').animate({
+					'width':data
+				},50);
+
+			});
+
+			socket.on('lightPot02', function(data){
+				console.log('light value02'+ data);
+				$('#lightPot02').animate({
+					'width':data
+				},50);
+
+			});
+
+			socket.on('ardButton01', function(data){
+				console.log('ardButton value01'+ data);
+				
+				if(data==1){
+					$('#ardButton01').css({
+						background: 'blue'
+					});
+
+
+				}else if(data==0){
+					$('#ardButton01').css({
+						background: '#eeeeee'
+					});
+
+				}
+
+			});
+			socket.on('ardButton02', function(data){
+				console.log('ardButton value02'+ data);
+				
+				if(data==1){
+					$('#ardButton02').css({
+						background: 'blue'
+					});
+
+
+				}else if(data==0){
+					$('#ardButton02').css({
+						background: '#eeeeee'
+					});
+
+				}
+
+			});
+
+			
+
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,118 @@
+getDataButton03+=data;
+
+		if(getDataButton03.indexOf('O')>=0&&getDataButton03.indexOf('P')>=0){
+
+			sendDataButton03=getDataButton03.substring(getDataButton03.indexOf('J')+1, getDataButton03.indexOf('K'));
+			getDataButton03='';
+			//util.log('Received data='+ getDataButton);
+			util.log(sendDataButton03);
+			io.sockets.emit('ardButton03', sendDataButton03);
+
+		};
+
+		getDataButton04+=data;
+
+		if(getDataButton04.indexOf('O')>=0&&getDataButton03.indexOf('P')>=0){
+
+			sendDataButton04=getDataButton04.substring(getDataButton04.indexOf('J')+1, getDataButton04.indexOf('K'));
+			getDataButton04='';
+			//util.log('Received data='+ getDataButton);
+			util.log(sendDataButton04);
+			io.sockets.emit('ardButton04', sendDataButton04);
+		};
+
+socket.on('ardButton03', function(data){
+				console.log('ardButton value'+ data);
+				
+				if(data==1){
+					$('#ardButton03').css({
+						background: 'yellow'
+					});
+
+
+				}else if(data==0){
+					$('#ardButton03').css({
+						background: 'white'
+					});
+
+				}
+
+			});
+
+			socket.on('ardButton04', function(data){
+				console.log('ardButton value'+ data);
+				
+				if(data==1){
+					$('#ardButton04').css({
+						background: 'yellow'
+					});
+
+
+				}else if(data==0){
+					$('#ardButton04').css({
+						background: 'white'
+					});
+
+				}
+
+			});
+
+			socket.on('pot01', function(data){
+				console.log('Pot value01'+ data);
+				$('#pot01').css({
+						backgroundColor:"rgb("+data+"/10,0,0)"
+					});
+
+			});
+
+			socket.on('pot02', function(data){
+				console.log('Pot value02'+ data);
+					$('#pot02').css({
+						backgroundColor:"rgb("+data+"/10,0,0)"
+					});
+
+			});
+			<div id="pot02" style="font-size: 1.2em; width: 100px; height: 100px; border-radius: 50%; background-color: #eeeeee"> </div>
+
+		<div id="pot01" style="font-size: 1.2em; width: 100px; height: 100px; border-radius: 50%; background-color: #eeeeee"> </div>
+getPotData01+=data;
+
+		if(getPotData01.indexOf('E')>=0&&getPotData01.indexOf('F')>=0){
+
+			sendPotData01=getPotData01.substring(getPotData01.indexOf('E')+1, getPotData01.indexOf('F'));
+			getPotData01='';
+			//util.log('Received data='+ getData);
+			util.log(sendPotData01);
+			io.sockets.emit('pot01', sendPotData01);
+
+		};
+
+		getPotData02+=data;
+
+		if(getPotData02.indexOf('G')>=0&&getPotData02.indexOf('H')>=0){
+
+			sendPotData02=getPotData02.substring(getPotData02.indexOf('G')+1, getPotData02.indexOf('H'));
+			getPotData02='';
+			//util.log('Received data='+ getData);
+			util.log(sendPotData02);
+			io.sockets.emit('pot02', sendPotData02);
+
+		};
+
+
+
+if(prevVal01!=sensorVal01){
+  Serial.print('E');
+   Serial.print(sensorVal01);
+    Serial.print('F');
+    prevVal01=sensorVal01;
+ 
+}
+
+if(prevVal02!=sensorVal02){
+  Serial.print('G');
+   Serial.print(sensorVal02);
+    Serial.print('H');
+    prevVal02=sensorVal02;
+ 
+}
